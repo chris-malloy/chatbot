@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Chris Malloy Chatbot!</title>
+    <style>
+        html,
+        body {
+            font-family: 'MS Sans Serif', Geneva, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            width: 100%;
+        }
+
+        .robo-text {
+            color: black;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body style="background-color: #B1CDFF" class="well custom-well">
+    <div class="container">
+        <h1>
+            Behold, it is Saxbot!
+        </h1>
+        <h2 class="logo">
+            <img src="saxbot.JPG" alt="Wrench">
+        </h2>
+        <div class="chat-box">
+            <div class="message-area">
+            </div>
+            <div class="input-area">
+                <input/>
+                <button>send</button>
+            </div>
+        </div>
+    </div>
+  
+<script src="chat.js">
+let inputElement = document.querySelector('input');
+let button = document.querySelector('button');
+let messageArea = document.querySelector('.message-area');
+
+let robotAnswers = [
+    'Welcome!',
+    'How are you today?',
+    'That is nice to hear.',
+    'Do you like dogs?',
+    'Wonderful! Me too!',
+    'Always a pleasure',
+];
+
+let currentAnswer = 0;
+
+let addMessage = (text, className) => {
+    let message = document.createElement('p');
+    message.textContent = text;
+    message.setAttribute('class', className);
+    messageArea.appendChild(message);
+};
+
+let robotResponse = () => {
+    let message = robotAnswers[currentAnswer];
+    addMessage(message, 'robo-text');
+    currentAnswer = currentAnswer + 1;
+    if (currentAnswer == robotAnswers.length) {
+        // start over!
+        currentAnswer = 0;
+    }
+}
+
+button.addEventListener('click', () => {
+    let messageText = inputElement.value;
+    addMessage(messageText);
+    inputElement.value = '';
+    setTimeout(robotResponse, 1100);
+});
+</script>
+</body>
+</html>
